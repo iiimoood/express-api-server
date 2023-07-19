@@ -22,6 +22,14 @@ router.route('/seats').post((req, res) => {
   const { day, seat, client, email } = req.body;
   const id = uuidv4();
 
+  const isTaken = db.seats.some(
+    (item) => item.day === day && item.seat === seat
+  );
+
+  if (isTaken) {
+    res.status(409).json({ message: 'The slot is already taken...' });
+  }
+
   const newSeat = {
     id,
     day,
