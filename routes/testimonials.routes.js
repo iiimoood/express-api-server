@@ -7,6 +7,12 @@ router.route('/testimonials').get((req, res) => {
   res.json(db.testimonials);
 });
 
+router.route('/testimonials/random').get((req, res) => {
+  const randomIndex = Math.floor(Math.random() * db.testimonials.length);
+  const randomTestimonial = db.testimonials[randomIndex];
+  res.json(randomTestimonial);
+});
+
 router.route('/testimonials/:id').get((req, res) => {
   const { id } = req.params;
   const testimonial = db.testimonials.find((item) => item.id === Number(id));
@@ -15,12 +21,6 @@ router.route('/testimonials/:id').get((req, res) => {
   } else {
     res.status(404).json({ error: 'Testimonial not found' });
   }
-});
-
-router.route('/testimonials/random').get((req, res) => {
-  const randomIndex = Math.floor(Math.random() * db.length);
-  const randomTestimonial = db.testimonials[randomIndex];
-  res.json(randomTestimonial);
 });
 
 router.route('/testimonials').post((req, res) => {
