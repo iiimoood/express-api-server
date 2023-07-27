@@ -9,13 +9,9 @@ import {
   Alert,
   Progress,
 } from 'reactstrap';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  addSeatRequest,
-  getRequests,
-  loadSeatsRequest,
-} from '../../../redux/seatsRedux';
+import { addSeatRequest, getRequests } from '../../../redux/seatsRedux';
 
 import './OrderTicketForm.scss';
 import SeatChooser from './../SeatChooser/SeatChooser';
@@ -34,11 +30,11 @@ const OrderTicketForm = () => {
   const [isError, setIsError] = useState(false);
   const [checkedBox, setCheckedBox] = useState(false);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (order.client && order.email && order.day && order.seat && checkedBox) {
       dispatch(loadSeatsRequest());
     }
-  }, [order, dispatch, checkedBox]);
+  }, [order, dispatch, checkedBox]); */
 
   const updateSeat = (e, seatId) => {
     e.preventDefault();
