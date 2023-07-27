@@ -30,12 +30,6 @@ const OrderTicketForm = () => {
   const [isError, setIsError] = useState(false);
   const [checkedBox, setCheckedBox] = useState(false);
 
-  /*useEffect(() => {
-    if (order.client && order.email && order.day && order.seat && checkedBox) {
-      dispatch(loadSeatsRequest());
-    }
-  }, [order, dispatch, checkedBox]); */
-
   const updateSeat = (e, seatId) => {
     e.preventDefault();
     setOrder({ ...order, seat: seatId });
