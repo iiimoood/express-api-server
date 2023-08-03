@@ -33,7 +33,7 @@ app.use('/api', testimonialsRoutes);
 app.use('/api', concertsRoutes);
 app.use('/api', seatsRoutes);
 
-mongoose.connect('mongodb://localhost:27017/NewWaveDB', {
+mongoose.connect('mongodb+srv://iiimoood:Mongo123456@cluster0.a9a0xii.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
 });
 const db = mongoose.connection;
