@@ -5,7 +5,6 @@ const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const mongoose = require('mongoose');
 
-
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
@@ -33,9 +32,13 @@ app.use('/api', testimonialsRoutes);
 app.use('/api', concertsRoutes);
 app.use('/api', seatsRoutes);
 
-mongoose.connect('mongodb+srv://iiimoood:Mongo123456@cluster0.a9a0xii.mongodb.net/?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-});
+mongoose.connect(
+  'mongodb+srv://iiimoood:Mongo123456@cluster0.a9a0xii.mongodb.net/NewWaveDB?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+  }
+);
+
 const db = mongoose.connection;
 
 db.once('open', () => {
