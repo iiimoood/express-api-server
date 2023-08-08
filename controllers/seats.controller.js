@@ -33,8 +33,17 @@ exports.getById = async (req, res) => {
 exports.postNew = async (req, res) => {
   try {
     const { day, seat, client, email } = req.body;
-    const newSeat = new Seat({ day: day, seat: seat, client: client, email: email });
+    const newSeat = new Seat({
+      day: day,
+      seat: seat,
+      client: client,
+      email: email,
+    });
     await newSeat.save();
+
+    const seats = await Seat.find();
+    req.io.emit('seatsUpdated', seats);
+
     res.json({ message: 'OK' });
   } catch (err) {
     res.status(500).json({ message: err });
@@ -42,12 +51,12 @@ exports.postNew = async (req, res) => {
 };
 
 exports.putChanged = async (req, res) => {
-    const { day, seat, client, email } = req.body;
+  const { day, seat, client, email } = req.body;
 
   try {
     const seat = await Seat.findById(req.params.id);
     if (seat) {
-        seat.day = day;
+      seat.day = day;
       seat.seat = seat;
       seat.client = client;
       seat.email = email;
