@@ -5,6 +5,9 @@ const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const mongoose = require('mongoose');
 
+const uri =
+  'mongodb+srv://iiimoood:Mongo123456@cluster0.a9a0xii.mongodb.net/NewWaveDB?retryWrites=true&w=majority';
+
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
@@ -32,13 +35,14 @@ app.use('/api', testimonialsRoutes);
 app.use('/api', concertsRoutes);
 app.use('/api', seatsRoutes);
 
-mongoose.connect(
-  'mongodb+srv://iiimoood:Mongo123456@cluster0.a9a0xii.mongodb.net/NewWaveDB?retryWrites=true&w=majority',
-  {
-    useNewUrlParser: true,
-  }
-);
+const NODE_ENV = process.env.NODE_ENV;
+let dbUri = '';
 
+if (NODE_ENV === 'production') dbUri = uri;
+else if (NODE_ENV === 'test') dbUri = 'mongodb://localhost:27017/NewWaveDBTest';
+else dbUri = 'mongodb://localhost:27017/NewWaveDB';
+
+mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
@@ -57,3 +61,5 @@ app.get('*', (req, res) => {
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found...' });
 });
+
+module.exports = server;
