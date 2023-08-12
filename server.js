@@ -5,8 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const mongoose = require('mongoose');
 
-const uri =
-  'mongodb+srv://iiimoood:Mongo123456@cluster0.a9a0xii.mongodb.net/NewWaveDB?retryWrites=true&w=majority';
+const uri = `mongodb+srv://iiimoood:${process.env.DB_PASS}@cluster0.a9a0xii.mongodb.net/NewWaveDB?retryWrites=true&w=majority`;
 
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
