@@ -4,6 +4,7 @@ const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 
 const uri = `mongodb+srv://iiimoood:${process.env.DB_PASS}@cluster0.a9a0xii.mongodb.net/NewWaveDB?retryWrites=true&w=majority`;
 
@@ -13,6 +14,7 @@ const seatsRoutes = require('./routes/seats.routes');
 
 const app = express();
 
+app.use(helmet());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

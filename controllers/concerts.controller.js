@@ -1,4 +1,5 @@
 const Concert = require('../models/concert.model');
+const sanitize = require('mongo-sanitize');
 
 exports.getAll = async (req, res) => {
   try {
@@ -32,7 +33,12 @@ exports.getById = async (req, res) => {
 
 exports.postNew = async (req, res) => {
   try {
-    const { performer, genre, price, day, image } = req.body;
+    const performer = sanitize(req.body.performer);
+    const genre = sanitize(req.body.genre);
+    const price = sanitize(req.body.price);
+    const day = sanitize(req.body.day);
+    const image = sanitize(req.body.image);
+
     const newConcert = new Concert({
       performer: performer,
       genre: genre,

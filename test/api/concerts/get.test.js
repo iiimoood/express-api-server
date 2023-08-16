@@ -31,6 +31,7 @@ describe('GET /api/concerts', () => {
   it('/performer/:performer should return concerts searched by performer', async () => {
     const performer = 'Performer #2';
     const res = await request(server).get(`/concerts/performer/${performer}`);
+    console.log(res.body);
     expect(res.status).to.be.equal(200);
     expect(res.body).to.be.an('array');
     expect(res.body.length).to.be.equal(1);
