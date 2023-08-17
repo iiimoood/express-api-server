@@ -11,8 +11,8 @@ const request = chai.request;
 describe('GET /api/concerts', () => {
   before(async () => {
     const testConOne = new Concert({
-      performer: 'Performer #1',
-      genre: 'Genre #1',
+      performer: 'Performer 1',
+      genre: 'Genre 1',
       price: 15,
       day: 1,
       image: 'image1.jpg',
@@ -20,8 +20,8 @@ describe('GET /api/concerts', () => {
     await testConOne.save();
 
     const testConTwo = new Concert({
-      performer: 'Performer #2',
-      genre: 'Genre #2',
+      performer: 'Performer 2',
+      genre: 'Genre 2',
       price: 25,
       day: 1,
       image: 'image2.jpg',
@@ -29,16 +29,17 @@ describe('GET /api/concerts', () => {
     await testConTwo.save();
   });
   it('/performer/:performer should return concerts searched by performer', async () => {
-    const performer = 'Performer #2';
-    const res = await request(server).get(`/concerts/performer/${performer}`);
-    console.log(res.body);
+    const performer = 'Performer 2';
+    const res = await request(server).get(
+      `/api/concerts/performer/${performer}`
+    );
     expect(res.status).to.be.equal(200);
     expect(res.body).to.be.an('array');
     expect(res.body.length).to.be.equal(1);
   });
   it('/genre/:genre should return concerts searched by genre', async () => {
-    const genre = 'Genre #1';
-    const res = await request(server).get(`/concerts/genre/${genre}`);
+    const genre = 'Genre 1';
+    const res = await request(server).get(`/api/concerts/genre/${genre}`);
     expect(res.status).to.be.equal(200);
     expect(res.body).to.be.an('array');
     expect(res.body.length).to.be.equal(1);
@@ -48,7 +49,7 @@ describe('GET /api/concerts', () => {
     const price_max = 25;
 
     const res = await request(server).get(
-      `/concerts/price/${price_min}/${price_max}`
+      `/api/concerts/price/${price_min}/${price_max}`
     );
     expect(res.status).to.be.equal(200);
     expect(res.body).to.be.an('array');
@@ -56,7 +57,7 @@ describe('GET /api/concerts', () => {
   });
   it('/day/:day should return concerts searched by day', async () => {
     const day = 1;
-    const res = await request(server).get(`/concerts/day/${day}`);
+    const res = await request(server).get(`/api/concerts/day/${day}`);
     expect(res.status).to.be.equal(200);
     expect(res.body).to.be.an('array');
     expect(res.body.length).to.be.equal(2);
